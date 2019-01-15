@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lz.snappy.echartsDemo.demo.dao.PersonMapper">
+
+	<resultMap type="com.lz.snappy.echartsDemo.demo.model.Person"
+		id="person">
+		<id column="uid" property="id"/>
+		<result column="username" property="userName" />
+		<!-- 
+			集合中的数据关联到另一个查询时，可在其中使用select属性，其中的值对应的查询语句id
+			必须配合column使用，等号左边代表传入的参数名称，右边代表要查询的列名
+		 -->
+		<collection column="{id=uid}" property="weights" ofType="com.lz.snappy.echartsDemo.demo.model.Weight"  select="com.lz.snappy.echartsDemo.demo.dao.WeightMapper.findWeights">
+			<id column="wid" property="id" />
+			<result column="weight" property="weight"/>
+			<result column="wdate" property="wdate"/>
+		</collection>
+	</resultMap>
+
+	<select id="findWeightByPerson" parameterType="Integer"
+		resultMap="person">
+		select uid,username from w_user where uid = #{id}
+	</select>
+</mapper>

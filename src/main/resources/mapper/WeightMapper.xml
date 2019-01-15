@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lz.snappy.echartsDemo.demo.dao.WeightMapper">
+
+<!-- 	<resultMap type="com.lz.snappy.echartsDemo.demo.model.Weight" id="weight"> -->
+<!-- 		<id column="wid" property="id"/> -->
+<!-- 		<result column="weight" property="weight"/> -->
+<!-- 	</resultMap> -->
+
+	<select id="findWeights" resultType="com.lz.snappy.echartsDemo.demo.model.Weight">
+		select * from w_weight where uid = #{id} order by weight asc
+	</select>
+
+</mapper>
